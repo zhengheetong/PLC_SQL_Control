@@ -1,0 +1,66 @@
+﻿<ui:FluentWindow x:Class="PLC_SQL_Control.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:PLC_SQL_Control"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="#FF2A2A2B" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <ui:TitleBar CloseClicked="TitleBar_CloseClicked" Title="PLC SQL Control" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" Height="auto" ClipToBounds="True"/>
+        <Grid Margin="0,24,0,0" Height="109" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <ui:TextBlock    VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Column="0" Grid.Row="0" Text="Controller IP"/>
+            <ui:TextBox      Margin="5,5,5,5" Grid.Column="1" Grid.Row="0" x:Name="PLCIP_tb"  PlaceholderEnabled="True" PlaceholderText="192.168.1.1" Height="36"/>
+            <ui:ToggleSwitch VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Column="2" Grid.Row="0" x:Name="PLC_Connect_Switch" Content="Disconnected" Click="PLC_Connect_Switch_Checked"/>
+            <ui:TextBlock    VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Column="3" Grid.Row="0" Text="Database Name"/>
+            <ui:TextBox      Margin="5,5,5,5" Grid.Column="4" Grid.Row="0" x:Name="DBName_tb"   IsEnabled="False" PlaceholderEnabled="True" ClearButtonEnabled="False" Height="36"/>
+            <ui:TextBlock    VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Column="0" Grid.Row="1" Text="Database IP"/>
+            <ui:TextBox      Margin="5,5,5,5" Grid.Column="1" Grid.Row="1" x:Name="DBIP_tb"   IsEnabled="False" PlaceholderEnabled="True" ClearButtonEnabled="False" Height="36" />
+            <ui:ToggleSwitch VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Column="2" Grid.Row="1" x:Name="DB_Connect_Switch" IsEnabled="False" Content="Disconnected" Checked="DB_Connect_Switch_Checked"/>
+            <ui:TextBlock    VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Column="3" Grid.Row="1" Text="Table"/>
+            <ComboBox        Margin="5,5,5,5" Grid.Column="4" Grid.Row="1" x:Name="cb_Table" SelectionChanged="cb_Table_Selected" Height="36"/>
+        </Grid>
+        <DataGrid x:Name="SQL_DG" Margin="217,138,0,0" IsReadOnly="True" GridLinesVisibility="All" BorderBrush="Black" UseLayoutRounding="False" HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.AccentColorBrushKey}}" VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.AccentColorBrushKey}}"/>
+
+        <Grid Margin="0,138,0,100" HorizontalAlignment="Left" Width="212" >
+            <ui:DynamicScrollViewer>
+                <StackPanel Name="SP_Filter">
+                    <ui:TextBlock    Name="tb_Filter" Text="Filter" Margin="10,5,0,0" FontWeight="Bold"/>
+                    <ui:Button       Name="btn_RT" Content="Real Time Viewer" Margin="5,5,5,5" CornerRadius="20" Click="btn_RT_Click" IsEnabled="False"/>
+                    <ui:ToggleSwitch Name="LN_Switch" Content="LotNumber" Margin="5,5,5,5"/>
+                    <ComboBox        Name="cb_LN" Margin="5,5,5,5"/>
+                </StackPanel>
+            </ui:DynamicScrollViewer>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Width="217" Height="100" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ui:Button Grid.Row="0" Grid.Column="0" Content="Export" Click="Button_Export_Click" Margin="5,0,5,0" HorizontalAlignment="Center" Width="73" Height="auto"/>
+            <ui:Button Grid.Row="0" Grid.Column="1" Content="Clear"  Click="Button_Clear_Click"  Margin="5,0,5,0" HorizontalAlignment="Center" Width="73" Height="auto"/>
+            <ui:Button Grid.Row="0" Grid.Column="2" Content="Search" Click="Button_Search_Click" Margin="5,0,5,0" HorizontalAlignment="Center" Width="73" Height="auto"/>
+            <ui:ToggleSwitch Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="Theme_Switch" Content="Dark Mode" Margin="20,0,0,5" Checked="Theme_Switch_Checked" Unchecked="Theme_Switch_Unchecked" />
+
+        </Grid>
+    </Grid>
+
+
+</ui:FluentWindow>

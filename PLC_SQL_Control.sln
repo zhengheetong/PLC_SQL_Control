@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLC_SQL_Control", "PLC_SQL_Control\PLC_SQL_Control.csproj", "{01BDE52C-1DD9-4A60-8FAC-24413E95D5BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01BDE52C-1DD9-4A60-8FAC-24413E95D5BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01BDE52C-1DD9-4A60-8FAC-24413E95D5BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01BDE52C-1DD9-4A60-8FAC-24413E95D5BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01BDE52C-1DD9-4A60-8FAC-24413E95D5BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A74872D8-CF26-4D47-8FBD-67C8C5BD2D17}
+	EndGlobalSection
+EndGlobal
