@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Microsoft.Data.SqlClient;
 using Wpf.Ui.Controls;
 
@@ -20,13 +8,13 @@ namespace PLC_SQL_Control
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : FluentWindow
+    public partial class RealTimeViewer : FluentWindow
     {
         public string connectionstring = string.Empty;
         public string tablename = string.Empty;
         private string sql_query = string.Empty;
 
-        public Window1()
+        public RealTimeViewer()
         {
             InitializeComponent();
         }

@@ -1,4 +1,4 @@
-﻿<ui:FluentWindow x:Class="PLC_SQL_Control.Window1"
+﻿<ui:FluentWindow x:Class="PLC_SQL_Control.RealTimeViewer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

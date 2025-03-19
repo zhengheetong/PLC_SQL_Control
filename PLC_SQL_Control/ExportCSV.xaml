@@ -31,7 +31,7 @@
         <ui:TextBlock Grid.Row="3" Grid.Column="0" Text="Select Folder" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,5,5,5"/>
         <ui:TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="tb_Folder" PlaceholderEnabled="True" PlaceholderText="C:\Users\user\Documents" Height="auto" Margin="5,5,5,5"/>
         <ui:Button Click="browse_Folder" Grid.Column="2" Grid.Row="4" Content="..." VerticalAlignment="Center" HorizontalAlignment="Left" Height="auto" Margin="5,5,5,5"/>
-        <ui:TextBlock Grid.Row="5" Grid.Column="0" Text="Data Per File" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,5,5,5"/>
+        <ui:TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Data Per File (Default: 2000)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,5,5,5"/>
         <ui:NumberBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" x:Name="tb_DataPerFile" Text="2000" Height="auto" Margin="5,5,5,5"/>
         <ui:Button Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Content="Cancel" Click="Button_Cancel_Click" Margin="5,5,5,5"/>
         <ui:Button Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="3" Content="Export" Click="Button_Export_Click" Margin="5,5,5,5"/>

@@ -10,10 +10,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using MessageBox = Wpf.Ui.Controls.MessageBox;
 using TextBox = Wpf.Ui.Controls.TextBox;
-using Microsoft.Win32;
 using System.IO;
-using Microsoft.VisualBasic;
-using System.Security.Cryptography;
 
 
 
@@ -88,12 +85,12 @@ public partial class MainWindow : FluentWindow
         string? table_name = cb_Table.SelectedItem.ToString();
         if (table_name == null) return;
 
-        Window1 window1 = new Window1();
-        window1.tablename = table_name;
-        window1.connectionstring = this.connectionstring;
-        window1.TittleBar_modification.Title = window1.tablename;
-        window1.Top10Generate();
-        window1.Show();
+        RealTimeViewer rTV = new RealTimeViewer();
+        rTV.tablename = table_name;
+        rTV.connectionstring = this.connectionstring;
+        rTV.TittleBar_modification.Title = rTV.tablename;
+        rTV.Top10Generate();
+        rTV.Show();
     }
 
     #endregion
@@ -446,7 +443,9 @@ public partial class MainWindow : FluentWindow
 
     private void Button_Clear_Click(object sender, RoutedEventArgs e)
     {
-        foreach(KeyValuePair <string,TextBox> kvp in Filter1)
+        LN_Switch.IsChecked = false;
+        cb_LN.SelectedIndex = -1;
+        foreach (KeyValuePair <string,TextBox> kvp in Filter1)
         {
             Filter2[kvp.Key].IsChecked = false;
             kvp.Value.IsEnabled = false;
