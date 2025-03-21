@@ -11,6 +11,7 @@ using System.Data;
 using MessageBox = Wpf.Ui.Controls.MessageBox;
 using TextBox = Wpf.Ui.Controls.TextBox;
 using System.IO;
+using libplctag.NativeImport;
 
 
 
@@ -41,6 +42,7 @@ public partial class MainWindow : FluentWindow
         Setting_Initialize();
         PLCIP_tb.PreviewTextInput += new TextCompositionEventHandler(IPOnly);
         Empty_Table();
+
     }
 
     #region Other Initializations
@@ -372,6 +374,12 @@ public partial class MainWindow : FluentWindow
                 catch { }
             });
         });
+
+        if(table_name == "CALIBRATION")
+        {
+            btn_Export.IsEnabled = false;
+        }
+
     }
 
     private void Empty_Table()
@@ -484,7 +492,8 @@ public partial class MainWindow : FluentWindow
         string summaryReport = generateSummaryReport(lotNumber);
         File.WriteAllText(path + $"/Summary of {stationName} - {DateTime.Now.ToShortDateString()}.csv", summaryReport);
 
-        string calibrationReport = generateCalibrationReport();
+       ( bool check, string calibrationReport) = generateCalibrationReport(stationName);
+        if (!check) return;
         File.WriteAllText(path + $"/Calibration - {stationName} - {DateTime.Now.ToShortDateString()}.csv", calibrationReport);
 
     }
@@ -534,7 +543,7 @@ public partial class MainWindow : FluentWindow
             foreach (DataColumn col in kvp.Value.Columns)
             {
                 if (col.ColumnName.ToUpper() == "LOTNUMBER") continue;
-                sb.Append($"\"{col.ColumnName}\",");
+                sb.Append($"{col.ColumnName},");
             }
             sb.Remove(sb.Length - 1, 1);
             sb.Append(Environment.NewLine);
@@ -543,7 +552,7 @@ public partial class MainWindow : FluentWindow
                 foreach (DataColumn col in kvp.Value.Columns)
                 {
                     if (col.ColumnName.ToUpper() == "LOTNUMBER") continue;
-                    sb.Append($"\"{dr[col].ToString()}\",");
+                    sb.Append($"{dr[col].ToString()},");
                 }
                 sb.Remove(sb.Length - 1, 1);
                 sb.Append(Environment.NewLine);
@@ -583,20 +592,65 @@ public partial class MainWindow : FluentWindow
             seconds.Add(timeSpans[i].TotalSeconds);
         }
         
+
         double uph = 3600 / seconds.Average();// units per hour
         stringBuilder.Append("Lot Number:," + LotNumber + Environment.NewLine);
         stringBuilder.Append("Lot Quantity:," + count.ToString() + Environment.NewLine);
         stringBuilder.Append("Total Input:," + count.ToString() + Environment.NewLine);
-        stringBuilder.Append("Total Output:," + pass.ToString() + Environment.NewLine);
+        stringBuilder.Append("Total Output:," + (pass/count*100).ToString()+ Environment.NewLine);
+        stringBuilder.Append("Total Output(pass):," + pass.ToString()+ Environment.NewLine);
+        stringBuilder.Append("Total Output(fail):,"+ (count - pass).ToString() + Environment.NewLine);
         stringBuilder.Append("Units Per Hour:," + uph.ToString() + Environment.NewLine);
 
 
         return stringBuilder.ToString();
     }
 
-    private string generateCalibrationReport()
+    private (bool,string) generateCalibrationReport(string stationName)
     {
-        return "";
+        DateTime today = DateTime.Now;
+        StringBuilder sb = new StringBuilder();
+
+        DataTable dt = new DataTable();
+
+
+        using (SqlConnection cnn = new SqlConnection(connectionstring))
+        {
+            using (SqlCommand cmd = new SqlCommand($"SELECT * FROM [CALIBRATION]"))
+            {
+                cmd.Connection = cnn;
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    adapter.Fill(dt);
+                }
+            }
+        }
+
+        dt = dt.AsEnumerable()
+            .Where(x => x.Field<DateTime>("DATETIME").ToString("d/MM/yyyy") == today.ToString("d/MM/yyyy"))
+            .Where(x => x.Field<string>("STATIONNAME")?.ToString().ToLower()==stationName.ToLower())
+            .CopyToDataTable();
+
+        if (dt.Rows.Count == 0) return (false, "");
+
+        foreach (DataColumn col in dt.Columns)
+        {
+            if (col.ColumnName=="STATIONNAME") continue;
+            sb.Append($"{col.ColumnName},");
+        }
+        sb.Remove(sb.Length - 1, 1);
+        sb.Append(Environment.NewLine);
+        foreach (DataRow dr in dt.Rows)
+        {
+            foreach (DataColumn col in dt.Columns)
+            {
+                if (col.ColumnName == "STATIONNAME") continue;
+                sb.Append($"{dr[col].ToString()},");
+            }
+            sb.Remove(sb.Length - 1, 1);
+            sb.Append(Environment.NewLine);
+        }
+        return (true,sb.ToString());
     }
 
 

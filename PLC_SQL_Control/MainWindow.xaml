@@ -54,7 +54,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ui:Button Grid.Row="0" Grid.Column="0" Content="Export" Click="Button_Export_Click" Margin="5,0,5,0" HorizontalAlignment="Center" Width="73" Height="auto"/>
+            <ui:Button Name="btn_Export" Grid.Row="0" Grid.Column="0" Content="Export" Click="Button_Export_Click" Margin="5,0,5,0" HorizontalAlignment="Center" Width="73" Height="auto"/>
             <ui:Button Grid.Row="0" Grid.Column="1" Content="Clear"  Click="Button_Clear_Click"  Margin="5,0,5,0" HorizontalAlignment="Center" Width="73" Height="auto"/>
             <ui:Button Grid.Row="0" Grid.Column="2" Content="Search" Click="Button_Search_Click" Margin="5,0,5,0" HorizontalAlignment="Center" Width="73" Height="auto"/>
             <ui:ToggleSwitch Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="Theme_Switch" Content="Dark Mode" Margin="20,0,0,5" Checked="Theme_Switch_Checked" Unchecked="Theme_Switch_Unchecked" />
