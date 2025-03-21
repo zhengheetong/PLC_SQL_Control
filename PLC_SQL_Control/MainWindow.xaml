@@ -39,8 +39,8 @@
                 <StackPanel Name="SP_Filter">
                     <ui:TextBlock    Name="tb_Filter" Text="Filter" Margin="10,5,0,0" FontWeight="Bold"/>
                     <ui:Button       Name="btn_RT" Content="Real Time Viewer" Margin="5,5,5,5" CornerRadius="20" Click="btn_RT_Click" IsEnabled="False"/>
-                    <ui:ToggleSwitch Name="LN_Switch" Content="LotNumber" Margin="5,5,5,5"/>
-                    <ComboBox        Name="cb_LN" Margin="5,5,5,5"/>
+                    <ui:ToggleSwitch Name="LN_Switch" Click="LN_Switch_Click" Content="LotNumber" Margin="5,5,5,5"/>
+                    <ComboBox        Name="cb_LN" IsEnabled="False" Margin="5,5,5,5"/>
                 </StackPanel>
             </ui:DynamicScrollViewer>
         </Grid>

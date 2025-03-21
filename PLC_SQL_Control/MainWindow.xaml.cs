@@ -656,4 +656,9 @@ public partial class MainWindow : FluentWindow
 
     #endregion
 
+    private void LN_Switch_Click(object sender, RoutedEventArgs e)
+    {
+        bool check = LN_Switch.IsChecked == true;
+        cb_LN.IsEnabled = check;
+    }
 }
