@@ -13,6 +13,7 @@ This application serves as an interface between an Omron PLC and an SQL Server, 
 To allow the application to communicate with your PLC, the following must be configured in Sysmac Studio:
 
 * **Database Connection**: Set up the connection parameters to point to your SQL Server instance.
+
 ![Connection Settings](Diagrams/Diagram_1.png)
 * **Global Variables**: Create these specific variables to allow the C# program to establish and verify connectivity:
     * `CSharp_Connected` (BOOL)
@@ -20,21 +21,28 @@ To allow the application to communicate with your PLC, the following must be con
     * `DB_Name` (STRING)
     * `DB_Login_Name` (STRING)
     * `DB_Login_Password` (STRING)
+
 ![Global Variables](Diagrams/Diagram_2.png)
 * **Publishing**: These variables must be set to **"Publish Only"** to be accessible by the external application.
+* 
 ![Variable Publishing](Diagrams/Diagram_6.png)
 * **Logic Blocks**: Implement the following functional blocks for database operations:
     * **DB_Connect**: Validates the connection between the PLC and SQL Server.
+    * 
 ![PLC DB Connection Test](Diagrams/Diagram_3.png)
     * **DB_CreateMapping**: Maps the PLC data structure to the SQL table.
+    * 
 ![PLC DB Logic](Diagrams/Diagram_4.png)
     * **DB_Insert**: Performs the actual data insertion.
+    * 
 ![PLC DB Insert](Diagrams/Diagram_5.png)
 
 ### 2. SQL Server Configuration
 * **TCP/IP Protocol**: This must be enabled in the SQL Server Configuration Manager.
+* 
 ![Enable TCP/IP](Diagrams/Diagram_7.png)
 * **Port Settings**: Under the `IPAll` section of the TCP/IP properties, set the **TCP Port to 1433** and clear any Dynamic Ports.
+* 
 ![Port Settings](Diagrams/Diagram_8.png)
 * **Create User** 
 
